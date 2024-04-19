@@ -1,4 +1,4 @@
-$('#inputPrice').mask("#.##0,00", {reverse: true});
+$('#inputPrice').mask("#.##0,00", { reverse: true });
 
 var products = [
   {
@@ -46,6 +46,26 @@ function loadProducts() {
   }
 }
 
+//save a product
+function save() {
+  console.log("olar");
+
+  var prod = {
+    id: products.length + 1,
+    name: document.getElementById("inputName").value,
+    description: document.getElementById("inputDescription").value,
+    price: document.getElementById("inputPrice").value,
+    category: document.getElementById("selectCategory").value,
+    promotion: document.getElementById("checkBoxPromotion").checked,
+    new: document.getElementById("checkBoxNewProduct").checked,
+  };
+
+  addNewRow(prod);
+  products.push(prod);
+
+  document.getElementById("formProduct").reset();
+}
+
 //add new row
 function addNewRow(prod) {
   var table = document.getElementById("productsTable");
@@ -55,8 +75,8 @@ function addNewRow(prod) {
   var formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
-});
-  
+  });
+
   //insert product id
   var idNode = document.createTextNode(prod.id);
   newRow.insertCell().appendChild(idNode);
@@ -64,7 +84,7 @@ function addNewRow(prod) {
   //insert product name
   var nameNode = document.createTextNode(prod.name);
   newRow.insertCell().appendChild(nameNode);
-  
+
   //insert product description
   var descriptionNode = document.createTextNode(prod.description);
   newRow.insertCell().appendChild(descriptionNode);
@@ -74,7 +94,7 @@ function addNewRow(prod) {
   newRow.insertCell().appendChild(priceNode);
 
   //insert product category
-  var categoryNode = document.createTextNode(categories[prod.category-1].name);
+  var categoryNode = document.createTextNode(categories[prod.category - 1].name);
   newRow.insertCell().appendChild(categoryNode);
 
   //insert product option
