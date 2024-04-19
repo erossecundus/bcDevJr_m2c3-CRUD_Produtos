@@ -1,4 +1,4 @@
-$('#inputPrice').mask("#.##0,00", { reverse: true });
+$("#inputPrice").mask("#.##0,00", { reverse: true });
 
 var products = [
   {
@@ -48,7 +48,6 @@ function loadProducts() {
 
 //save a product
 function save() {
-  console.log("olar");
 
   var prod = {
     id: products.length + 1,
@@ -72,9 +71,9 @@ function addNewRow(prod) {
 
   var newRow = table.insertRow();
 
-  var formatter = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
+  var formatter = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
   });
 
   //insert product id
@@ -87,7 +86,9 @@ function addNewRow(prod) {
 
   //insert product description
   var descriptionNode = document.createTextNode(prod.description);
-  newRow.insertCell().appendChild(descriptionNode);
+  var cell = newRow.insertCell();
+  cell.className ="d-none d-md-table-cell";
+  cell.appendChild(descriptionNode);
 
   //insert product price
   var priceNode = document.createTextNode(formatter.format(prod.price));
@@ -98,12 +99,14 @@ function addNewRow(prod) {
   newRow.insertCell().appendChild(categoryNode);
 
   //insert product option
-  var options = '';
+  var options = "";
   if (prod.promotion) {
-    options += '<span class="badge text-bg-success me-1">P</span>';
+    options += "<span class='badge text-bg-success me-1'>P</span>";
   }
   if (prod.new) {
-    options += '<span class="badge text-bg-primary">L</span>';
+    options += "<span class='badge text-bg-primary'>L</span>";
   }
-  newRow.insertCell().innerHTML = options;
+  var cell = newRow.insertCell();
+  cell.className = "d-none d-md-table-cell"
+  cell.innerHTML = options;
 }
